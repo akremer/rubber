@@ -10,8 +10,6 @@ module Rubber
       
       def initialize(env)
         super(env)
-        creds = Rubber::Util.symbolize_keys(env.credentials)
-        @client = ::Fog::DNS.new(creds)
       end
 
       def host_to_opts(host)
@@ -60,7 +58,7 @@ module Rubber
           fqdn << "#{opts[:domain]}"
         end
 
-        hosts = fqdn ? zone.records.find(fqdn) : zone.records.all
+        hosts = fqdn ? (zone.records.find(fqdn) rescue []) : zone.records.all
         hosts.each do |h|
           keep = true
 
