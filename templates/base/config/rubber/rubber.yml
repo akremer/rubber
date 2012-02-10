@@ -255,6 +255,7 @@ stop_on_error_cmd: "function error_exit { exit 99; }; trap error_exit ERR"
 #     raid_volumes:
 #       - device: /dev/md0 # OS device to to create raid array on
 #         mount: /mnt/fast # The directory to mount this array to
+#         mount_opts: 'nobootwait' # Recent Ubuntu versions require this flag or SSH will not start on reboot
 #         filesystem: xfs # the filesystem to create on array
 #         filesystem_opts: -f # the filesystem opts in mkfs
 #         raid_level: 0 # the raid level to use for the array
